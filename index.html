@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dailydo</title>
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+    <script src="services/jquery.js"></script>
+    <script src="services/bg.js"></script>
+    <script src="services/name.js"></script> 
+
+    <style>
+        .mainbg {
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .trans{
+            height: 100vh;
+            background-color: #00020285;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="mainbg">
+        <div class="trans">
+            <section class="section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-3">
+                            <p class="has-text-light">Quotes</p>
+                        </div>
+                        <div class="column is-7"></div>
+                        <div class="column is-2">
+                            <p class = "has-text-color-black has-text-weight-bold">Weather</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-half" id ="name">
+                            <div class="control">
+                                <input class="input is-large is-focused is-primary is-rounded" 
+                                type="text" placeholder="Let's goooo!" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="control">
+                    <div class="columns is-centered">
+                        <div class="column is-half">
+                            <div class="control">
+                                <input class="input" placeholder = "To-do"></input>
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

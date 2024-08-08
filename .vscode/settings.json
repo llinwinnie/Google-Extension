@@ -1,0 +1,4 @@
+{
+    "azureRepos.autoFetch.enabled": false,
+    "git.decorations.enabled": false
+}
