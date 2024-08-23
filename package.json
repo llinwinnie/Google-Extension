@@ -12,5 +12,8 @@
   "devDependencies": {
     "@types/chrome": "0.0.269",
     "bulma": "1.0.2"
+  },
+  "dependencies": {
+    "touch": "^3.1.1"
   }
 }

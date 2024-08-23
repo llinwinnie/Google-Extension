@@ -2,13 +2,23 @@
     "name": "dailydo",
     "version": "0.1",
     "manifest_version": 3,
+    "action": {
+      "default_popup": "hello.html",
+      "default_icon": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  } 
+    },
     "chrome_url_overrides" : {
         "newtab": "index.html"
     },
     "permissions": [
-      "storage"
-  ],
-  "action": {
-    "default_popup": "index.html"
-  }
+      "storage",
+      "geolocation",
+      "tabs"
+    ],
+    "background": {
+      "service_worker": "bg.js"
+    }
 }

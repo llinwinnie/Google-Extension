@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
     <script src="services/jquery.js"></script>
     <script src="services/bg.js"></script>
-    <script src="services/name.js"></script> 
-
+    <script src="services/header.js"></script>
+    <script src="services/weather.js"></script>
+    <script src="services/quotes.js"></script>
+    <script src="services/todo.js"></script> 
     <style>
         .mainbg {
             height: 100vh;
@@ -18,50 +20,82 @@
         }
         .trans{
             height: 100vh;
-            background-color: #00020285;
+            background-color: #0d242485;
         }
+        
     </style>
 </head>
 
 
-<body>
+
+<body> 
     <div class="mainbg">
         <div class="trans">
             <section class="section">
                 <div class="container">
                     <div class="columns">
-                        <div class="column is-3">
-                            <p class="has-text-light">Quotes</p>
+                        <div class=" columns is-4 google-apps">
+                            <a href="https://mail.google.com/" class="gmail-link">
+                                <img src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_48dp.png" alt="Gmail">
+                                <span>Gmail</span>
+                            </a>
+                            <div class="apps-menu">
+                                <img src="https://www.gstatic.com/images/icons/material/system/2x/apps_black_24dp.png" alt="Google Apps">
+                            </div>
                         </div>
-                        <div class="column is-7"></div>
-                        <div class="column is-2">
-                            <p class = "has-text-color-black has-text-weight-bold">Weather</p>
+                        <div class="column is-2" id="weather">
+                            <p class = "has-text-color-black has-text-weight-bold">weather</p>
                         </div>
                     </div>
                 </div>
-            </section>
+
+                <section class="section">
+                    <div class="container">
+                        <div class="columns">
+                            <button class="button is-small is-dark">News</button>
+    
+                            <button id="quoteButton" class="button is-small is-dark">Quotes</button>
+                            
+                            <div class="column is-3" id="quotes">
+                                <p class="has-text-light small"></p> <!-- The quote will be displayed here -->
+                            </div>
+                            <div class="column is-7"></div>
+                        </div>
+                    </div>
+                </section>
+          
             <section class="section">
                 <div class="container">
                     <div class="columns is-centered">
-                        <div class="column is-half" id ="name">
+                        <div class="column is-half" id="header">
                             <div class="control">
-                                <input class="input is-large is-focused is-primary is-rounded" 
-                                type="text" placeholder="Let's goooo!" />
+                                <input class="input is-large is-focused is-primary is-rounded" type="text"
+                                    placeholder="">
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
             <section class="section">
-                <div class="control">
+                <div class="container">
                     <div class="columns is-centered">
                         <div class="column is-half">
                             <div class="control">
-                                <input class="input" placeholder = "To-do"></input>
+                                <input id="todo" class="input is-rounded" placeholder="Any plan to work?">
                             </div>
+                        </div>
+                    </div>
+                    <div class="columns is-centered">
+                        <div class="column is-half ml-6">
+                            <div class="block">
+                                <ul id="todoSection"></ul>
+                            <div>
+                        </div>
                     </div>
                 </div>
             </section>
+
         </div>
     </div>
 </body>
