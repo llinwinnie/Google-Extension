@@ -1,4 +1,5 @@
 {
     "azureRepos.autoFetch.enabled": false,
-    "git.decorations.enabled": false
+    "git.decorations.enabled": false,
+    "liveServer.settings.port": 5501
 }

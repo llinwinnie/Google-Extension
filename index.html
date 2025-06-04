@@ -11,6 +11,7 @@
     <script src="services/header.js"></script>
     <script src="services/weather.js"></script>
     <script src="services/quotes.js"></script>
+    <script src="services/button.js"></script>
     <script src="services/todo.js"></script> 
     <style>
         .mainbg {
@@ -26,7 +27,58 @@
     </style>
 </head>
 
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
+    .mainbg {
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1350&q=80');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .trans {
+      height: 100vh;
+      background-color: rgba(13, 36, 36, 0.52);
+    }
+
+    /* Top‐links container */
+    .google-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .google-links img {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Larger spacing for sections on mobile */
+    .section {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    /* Quotes/news text style */
+    #quotes p,
+    #news p {
+      font-size: 0.9rem;
+      color: #edf2f7;
+    }
+
+    /* To‐do list styling */
+    #todoSection li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
 
 <body> 
     <div class="mainbg">
@@ -34,15 +86,18 @@
             <section class="section">
                 <div class="container">
                     <div class="columns">
+                        <div class="columns is-vcentered is-mobile">
                         <div class=" columns is-4 google-apps">
-                            <a href="https://mail.google.com/" class="gmail-link">
+                            <a href="https://mail.google.com/" target="_blank" class="has-text-white">
                                 <img src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_48dp.png" alt="Gmail">
                                 <span>Gmail</span>
                             </a>
+
                             <div class="apps-menu">
                                 <img src="https://www.gstatic.com/images/icons/material/system/2x/apps_black_24dp.png" alt="Google Apps">
                             </div>
                         </div>
+
                         <div class="column is-2" id="weather">
                             <p class = "has-text-color-black has-text-weight-bold">weather</p>
                         </div>
@@ -51,16 +106,20 @@
 
                 <section class="section">
                     <div class="container">
-                        <div class="columns">
-                            <button class="button is-small is-dark">News</button>
-    
-                            <button id="quoteButton" class="button is-small is-dark">Quotes</button>
-                            
-                            <div class="column is-3" id="quotes">
-                                <p class="has-text-light small"></p> <!-- The quote will be displayed here -->
-                            </div>
-                            <div class="column is-7"></div>
+                    <div class="columns is-vcentered is-mobile">
+                        <div class="column is-narrow">
+                            <button id="newsButton" class="button is-small is-dark">News</button>
                         </div>
+                        <div class="column is-narrow">
+                         <button id="quoteButton" class="button is-small is-dark">Quotes</button>
+                        </div>
+                        <div class="column is-4" id="quotes">
+                            <p>—</p>
+                        </div>
+                        <div class="column is-4" id="news">
+                            <p>—</p>
+                        </div>
+                    </div>
                     </div>
                 </section>
           
@@ -68,10 +127,11 @@
                 <div class="container">
                     <div class="columns is-centered">
                         <div class="column is-half" id="header">
-                            <div class="control">
-                                <input class="input is-large is-focused is-primary is-rounded" type="text"
-                                    placeholder="">
-                            </div>
+                            <input id="nameInput" class="input is-large is-focused is-primary is-rounded" type="text"
+                             placeholder="Enter your name" />
+                            <button id="nameSaveBtn" class="button is-small is-primary mt-2">Save</button>
+                        </div>
+                        <p id="greeting" class="mt-3 has-text-white"></p>
                         </div>
                     </div>
                 </div>
@@ -82,22 +142,19 @@
                     <div class="columns is-centered">
                         <div class="column is-half">
                             <div class="control">
-                                <input id="todo" class="input is-rounded" placeholder="Any plan to work?">
+                               <input id="todoInput" class="input is-rounded" placeholder="What’s your plan today?" />
                             </div>
                         </div>
                     </div>
                     <div class="columns is-centered">
                         <div class="column is-half ml-6">
-                            <div class="block">
-                                <ul id="todoSection"></ul>
-                            <div>
+                            <ul id="todoSection"></ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
+                </section>
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
