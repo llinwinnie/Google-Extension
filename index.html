@@ -1,160 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dailydo</title>
-    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
-    <script src="services/jquery.js"></script>
-    <script src="services/bg.js"></script>
-    <script src="services/header.js"></script>
-    <script src="services/weather.js"></script>
-    <script src="services/quotes.js"></script>
-    <script src="services/button.js"></script>
-    <script src="services/todo.js"></script> 
-    <style>
-        .mainbg {
-            height: 100vh;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .trans{
-            height: 100vh;
-            background-color: #0d242485;
-        }
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DailyDo</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+
+
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+<body>
+  <div class="overlay">
+ 
+    <div class="top-nav">
+      <a href="https://mail.google.com/" target="_blank">
+        <img src="assets/gmail_48.png" class="icon" alt="Gmail" /> Gmail
+      </a>
+      <a href="https://images.google.com/" target="_blank">
+        <img src="assets/images_icon.png" class="icon" alt="Images" /> Images
+      </a>
+      <a href="#" id="flaskLink">
+        <img src="assets/flask_icon.png" class="icon" alt="Flask" /> Labs
+      </a>
+      <a href="#" id="apps-link">
+        <img src="assets/apps_black_24dp.png" class="icon" alt="Apps" />
+      </a>
+      <a href="#" id="profile-link">
+        <img src="assets/profile_pic.png" class="profile" alt="Profile" />
+      </a>
+    </div>
 
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+    <div id="clock">
+      <div id="time">00:00</div>
+      <div id="date">Loading date...</div>
+    </div>
 
-    .mainbg {
-      height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1350&q=80');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
+   
+    <div class="events-container">
+      <h2>Big Events</h2>
+      <input id="eventInput" type="text" placeholder="Add an event and press Enter" />
+      <ul id="events-list"></ul>
+    </div>
 
-    .trans {
-      height: 100vh;
-      background-color: rgba(13, 36, 36, 0.52);
-    }
 
-    /* Top‐links container */
-    .google-links {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    <div class="greeting-card">
+      <h1>Welcome!</h1>
+      <div id="weather-display" class="weather-display">
+        <img id="weather-icon" src="" alt="Weather Icon" style="display: none;" />
+        <span id="weather-text">Loading…</span>
+      </div>
+    </div>
 
-    .google-links img {
-      width: 24px;
-      height: 24px;
-    }
+    <div class="todo-container">
+      <h2>To‐Do</h2>
+      <input id="todoInput" type="text" placeholder="Add a task and press Enter" />
+      <ul id="todo-list"></ul>
+    </div>
 
-    /* Larger spacing for sections on mobile */
-    .section {
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-    }
 
-    /* Quotes/news text style */
-    #quotes p,
-    #news p {
-      font-size: 0.9rem;
-      color: #edf2f7;
-    }
+    <div class="calculator" id="calculator">
+      <input type="text" class="calculator-display" id="calcDisplay" readonly />
+      <div class="calculator-buttons">
+        <button class="span-two" data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button data-value="/">÷</button>
 
-    /* To‐do list styling */
-    #todoSection li {
-      margin-bottom: 0.5rem;
-    }
-  </style>
-</head>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="*">×</button>
 
-<body> 
-    <div class="mainbg">
-        <div class="trans">
-            <section class="section">
-                <div class="container">
-                    <div class="columns">
-                        <div class="columns is-vcentered is-mobile">
-                        <div class=" columns is-4 google-apps">
-                            <a href="https://mail.google.com/" target="_blank" class="has-text-white">
-                                <img src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_48dp.png" alt="Gmail">
-                                <span>Gmail</span>
-                            </a>
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="-">−</button>
 
-                            <div class="apps-menu">
-                                <img src="https://www.gstatic.com/images/icons/material/system/2x/apps_black_24dp.png" alt="Google Apps">
-                            </div>
-                        </div>
+        <button data-value="0">0</button>
+        <button data-value=".">•</button>
+        <button data-value="=">=</button>
+        <button data-value="+">+</button>
 
-                        <div class="column is-2" id="weather">
-                            <p class = "has-text-color-black has-text-weight-bold">weather</p>
-                        </div>
-                    </div>
-                </div>
+        <button class="span-two" data-action="clear">C</button>
+      </div>
+    </div>
+  </div>
 
-                <section class="section">
-                    <div class="container">
-                    <div class="columns is-vcentered is-mobile">
-                        <div class="column is-narrow">
-                            <button id="newsButton" class="button is-small is-dark">News</button>
-                        </div>
-                        <div class="column is-narrow">
-                         <button id="quoteButton" class="button is-small is-dark">Quotes</button>
-                        </div>
-                        <div class="column is-4" id="quotes">
-                            <p>—</p>
-                        </div>
-                        <div class="column is-4" id="news">
-                            <p>—</p>
-                        </div>
-                    </div>
-                    </div>
-                </section>
-          
-            <section class="section">
-                <div class="container">
-                    <div class="columns is-centered">
-                        <div class="column is-half" id="header">
-                            <input id="nameInput" class="input is-large is-focused is-primary is-rounded" type="text"
-                             placeholder="Enter your name" />
-                            <button id="nameSaveBtn" class="button is-small is-primary mt-2">Save</button>
-                        </div>
-                        <p id="greeting" class="mt-3 has-text-white"></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <section class="section">
-                <div class="container">
-                    <div class="columns is-centered">
-                        <div class="column is-half">
-                            <div class="control">
-                               <input id="todoInput" class="input is-rounded" placeholder="What’s your plan today?" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns is-centered">
-                        <div class="column is-half ml-6">
-                            <ul id="todoSection"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+  <script src="services/jquery.min.js"></script>
+
+  <script src="services/bg.js"></script>
+  <script src="services/button.js"></script>
+  <script src="services/weather.js"></script>
+  <script src="services/quotes.js"></script>
+  <script src="services/news.js"></script>
+  <script src="services/bigEvents.js"></script>
+  <script src="services/todo.js"></script>
+  <script src="services/calculator.js"></script>
 </body>
-
 </html>

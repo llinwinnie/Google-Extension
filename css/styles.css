@@ -1,0 +1,274 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Base / Winnie‐the‐Pooh Yellow Background + Overlay
+────────────────────────────────────────────────────────────────────────── */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #FFF7AE; /* Pooh‐yellow */
+  overflow: hidden;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Slight semi‐transparent brown overlay to soften yellow */
+  background-color: rgba(93, 64, 55, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   TOP NAV: Gmail, Images, Flask, Apps, Profile
+────────────────────────────────────────────────────────────────────────── */
+.top-nav {
+  margin-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  padding-right: 1rem;
+  font-size: 0.9rem;
+  color: #5D4037; /* dark brown text */
+}
+
+.top-nav a,
+.top-nav img {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: #5D4037;
+  cursor: pointer;
+}
+
+.top-nav img.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.top-nav img.profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #000851; /* complementary navy border */
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   CLOCK + DATE (CENTERED TOP)
+────────────────────────────────────────────────────────────────────────── */
+#clock {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#time {
+  font-size: 4rem;
+  font-weight: 300;
+  color: #5D4037; /* dark brown */
+  margin-bottom: 0.2rem;
+}
+
+#date {
+  font-size: 1.2rem;
+  color: #5D4037;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   BIG EVENTS (UPPER LEFT)
+────────────────────────────────────────────────────────────────────────── */
+.events-container {
+  position: absolute;
+  top: 130px; /* below the clock+date */
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 2px solid #000851; /* navy border */
+  border-radius: 8px;
+  padding: 1rem;
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
+}
+
+.events-container h2 {
+  font-size: 1rem;
+  color: #5D4037;
+  margin-bottom: 0.5rem;
+}
+
+.events-container input {
+  width: 100%;
+  background-color: #FFF;
+  color: #5D4037;
+  border: 1px solid #000851;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.events-container ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.events-container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFF;
+  border: 1px solid #000851;
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  margin-bottom: 0.4rem;
+  color: #5D4037;
+  font-size: 0.9rem;
+}
+
+.events-container button.delete-event {
+  background: none;
+  border: none;
+  color: #5D4037;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   TO‐DO SECTION (CENTER‐LOWER)
+────────────────────────────────────────────────────────────────────────── */
+.todo-container {
+  margin-top: 2rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 2px solid #000851; /* navy border */
+  border-radius: 8px;
+  padding: 1rem;
+  width: 300px;
+  box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
+  text-align: center;
+}
+
+.todo-container h2 {
+  font-size: 1rem;
+  color: #5D4037;
+  margin-bottom: 0.5rem;
+}
+
+.todo-container input {
+  width: 100%;
+  background-color: #FFF;
+  color: #5D4037;
+  border: 1px solid #000851;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.todo-container ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.todo-container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFF;
+  border: 1px solid #000851;
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  margin-bottom: 0.4rem;
+  color: #5D4037;
+  font-size: 0.9rem;
+}
+
+.todo-container button.delete-todo {
+  background: none;
+  border: none;
+  color: #5D4037;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   CALCULATOR (BOTTOM RIGHT)
+────────────────────────────────────────────────────────────────────────── */
+.calculator {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #000851; /* navy border */
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
+  padding: 1rem;
+  width: 220px;
+}
+
+.calculator-display {
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid #000851;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  color: #5D4037;
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.calculator-buttons button {
+  background-color: #FFB300; /* Pooh‐orange */
+  border: none;
+  color: #5D4037;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calculator-buttons button:hover {
+  background-color: #FFC107;
+}
+
+.calculator-buttons .span-two {
+  grid-column: span 2;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   WEATHER (ICON & TEXT)
+────────────────────────────────────────────────────────────────────────── */
+.weather-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  color: #5D4037;
+  margin-top: 1rem;
+}
+
+.weather-display img {
+  width: 32px;
+  height: 32px;
+  filter: invert(21%) sepia(81%) saturate(427%) hue-rotate(339deg)
+    brightness(104%) contrast(101%);
+  /* tint icon to dark brown */
+}
