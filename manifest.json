@@ -2,6 +2,7 @@
     "name": "dailydo",
     "version": "0.1",
     "manifest_version": 3,
+    "description": "A Winnie‐the‐Pooh themed new tab page with clock, weather, quotes, news, to‐do, and calculator.",
     "action": {
       "default_popup": "hello.html",
       "default_icon": {
@@ -20,9 +21,12 @@
       "storage",
       "alarms",
       "geolocation",
+      "notifications",
       "tabs"
     ],
-    "background": {
-      "service_worker": "bg.js"
-    }
+    "host_permissions": [
+      "https://feeds.bbci.co.uk/*",
+      "https://api.open-meteo.com/*",
+      "https://api.quotable.io/*"
+  ]
 }
