@@ -4,15 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DailyDo</title>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-
-
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div class="overlay">
- 
     <div class="top-nav">
       <a href="https://mail.google.com/" target="_blank">
         <img src="assets/gmail_48.png" class="icon" alt="Gmail" /> Gmail
@@ -29,6 +25,7 @@
       <a href="#" id="profile-link">
         <img src="assets/profile_pic.png" class="profile" alt="Profile" />
       </a>
+      <a href="#" id="bgColorBtn">BG</a>
     </div>
 
     <div id="clock">
@@ -36,13 +33,11 @@
       <div id="date">Loading date...</div>
     </div>
 
-   
-    <div class="events-container">
-      <h2>Big Events</h2>
+    <div class="events-container draggable" id="bigEventsPanel">
+      <h2 class="panel-header">Big Events</h2>
       <input id="eventInput" type="text" placeholder="Add an event and press Enter" />
       <ul id="events-list"></ul>
     </div>
-
 
     <div class="greeting-card">
       <h1>Welcome!</h1>
@@ -52,44 +47,38 @@
       </div>
     </div>
 
-    <div class="todo-container">
-      <h2>To‐Do</h2>
+    <div class="todo-container draggable" id="todoPanel">
+      <h2 class="panel-header">To‐Do</h2>
       <input id="todoInput" type="text" placeholder="Add a task and press Enter" />
       <ul id="todo-list"></ul>
     </div>
 
-
-    <div class="calculator" id="calculator">
+    <div class="calculator draggable" id="calculatorPanel">
+      <h2 class="panel-header">Calculator</h2>
       <input type="text" class="calculator-display" id="calcDisplay" readonly />
       <div class="calculator-buttons">
         <button class="span-two" data-value="7">7</button>
         <button data-value="8">8</button>
         <button data-value="9">9</button>
         <button data-value="/">÷</button>
-
         <button data-value="4">4</button>
         <button data-value="5">5</button>
         <button data-value="6">6</button>
         <button data-value="*">×</button>
-
         <button data-value="1">1</button>
         <button data-value="2">2</button>
         <button data-value="3">3</button>
         <button data-value="-">−</button>
-
         <button data-value="0">0</button>
         <button data-value=".">•</button>
         <button data-value="=">=</button>
         <button data-value="+">+</button>
-
         <button class="span-two" data-action="clear">C</button>
       </div>
     </div>
   </div>
 
-
-  <script src="services/jquery.min.js"></script>
-
+  <script src="services/jquery.js"></script>
   <script src="services/bg.js"></script>
   <script src="services/button.js"></script>
   <script src="services/weather.js"></script>
@@ -98,5 +87,7 @@
   <script src="services/bigEvents.js"></script>
   <script src="services/todo.js"></script>
   <script src="services/calculator.js"></script>
+  <script src="services/drag.js"></script>
+  <script src="services/bgColor.js"></script>
 </body>
 </html>

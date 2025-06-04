@@ -1,12 +1,9 @@
-/* ───────────────────────────────────────────────────────────────────────────
-   Base / Winnie‐the‐Pooh Yellow Background + Overlay
-────────────────────────────────────────────────────────────────────────── */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #FFF7AE; /* Pooh‐yellow */
+  background-color: #FFF7AE;
   overflow: hidden;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -17,7 +14,6 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  /* Slight semi‐transparent brown overlay to soften yellow */
   background-color: rgba(93, 64, 55, 0.10);
   display: flex;
   flex-direction: column;
@@ -25,9 +21,6 @@ body {
   overflow-y: auto;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   TOP NAV: Gmail, Images, Flask, Apps, Profile
-────────────────────────────────────────────────────────────────────────── */
 .top-nav {
   margin-top: 0.5rem;
   width: 100%;
@@ -36,7 +29,7 @@ body {
   gap: 1.5rem;
   padding-right: 1rem;
   font-size: 0.9rem;
-  color: #5D4037; /* dark brown text */
+  color: #5D4037;
 }
 
 .top-nav a,
@@ -58,12 +51,9 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid #000851; /* complementary navy border */
+  border: 2px solid #000851;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   CLOCK + DATE (CENTERED TOP)
-────────────────────────────────────────────────────────────────────────── */
 #clock {
   margin-top: 1rem;
   text-align: center;
@@ -72,7 +62,7 @@ body {
 #time {
   font-size: 4rem;
   font-weight: 300;
-  color: #5D4037; /* dark brown */
+  color: #5D4037;
   margin-bottom: 0.2rem;
 }
 
@@ -81,37 +71,45 @@ body {
   color: #5D4037;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   BIG EVENTS (UPPER LEFT)
-────────────────────────────────────────────────────────────────────────── */
+.panel-header {
+  cursor: move;
+  background-color: #FFB3BA;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  color: #5D4037;
+  border-radius: 4px;
+  margin: -10px -10px 10px -10px;
+  text-align: center;
+}
+
 .events-container {
   position: absolute;
-  top: 130px; /* below the clock+date */
+  top: 130px;
   left: 20px;
   background-color: rgba(255, 255, 255, 0.85);
-  border: 2px solid #000851; /* navy border */
+  border: 2px solid #000851;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   width: 250px;
   max-height: 300px;
   overflow-y: auto;
   box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
-}
-
-.events-container h2 {
-  font-size: 1rem;
-  color: #5D4037;
-  margin-bottom: 0.5rem;
+  z-index: 10;
 }
 
 .events-container input {
   width: 100%;
   background-color: #FFF;
   color: #5D4037;
-  border: 1px solid #000851;
+  border: 1px solid #FFB3BA;
   border-radius: 4px;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.events-container input:focus {
+  outline: 2px solid #000851;
 }
 
 .events-container ul {
@@ -142,35 +140,31 @@ body {
   line-height: 1;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   TO‐DO SECTION (CENTER‐LOWER)
-────────────────────────────────────────────────────────────────────────── */
 .todo-container {
   margin-top: 2rem;
   background-color: rgba(255, 255, 255, 0.85);
-  border: 2px solid #000851; /* navy border */
+  border: 2px solid #000851;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   width: 300px;
   box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
   text-align: center;
-}
-
-.todo-container h2 {
-  font-size: 1rem;
-  color: #5D4037;
-  margin-bottom: 0.5rem;
+  z-index: 9;
 }
 
 .todo-container input {
   width: 100%;
   background-color: #FFF;
   color: #5D4037;
-  border: 1px solid #000851;
+  border: 1px solid #FFB3BA;
   border-radius: 4px;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
+}
+
+.todo-container input:focus {
+  outline: 2px solid #000851;
 }
 
 .todo-container ul {
@@ -201,25 +195,23 @@ body {
   line-height: 1;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   CALCULATOR (BOTTOM RIGHT)
-────────────────────────────────────────────────────────────────────────── */
 .calculator {
   position: absolute;
   bottom: 20px;
   right: 20px;
   background-color: rgba(255, 255, 255, 0.95);
-  border: 2px solid #000851; /* navy border */
+  border: 2px solid #000851;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(93, 64, 55, 0.2);
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   width: 220px;
+  z-index: 8;
 }
 
 .calculator-display {
   width: 100%;
   background-color: #FFF;
-  border: 1px solid #000851;
+  border: 1px solid #FFB3BA;
   border-radius: 4px;
   padding: 0.5rem;
   font-size: 1.2rem;
@@ -235,7 +227,7 @@ body {
 }
 
 .calculator-buttons button {
-  background-color: #FFB300; /* Pooh‐orange */
+  background-color: #DEB887;
   border: none;
   color: #5D4037;
   font-size: 1rem;
@@ -252,9 +244,6 @@ body {
   grid-column: span 2;
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   WEATHER (ICON & TEXT)
-────────────────────────────────────────────────────────────────────────── */
 .weather-display {
   display: flex;
   align-items: center;
@@ -268,7 +257,5 @@ body {
 .weather-display img {
   width: 32px;
   height: 32px;
-  filter: invert(21%) sepia(81%) saturate(427%) hue-rotate(339deg)
-    brightness(104%) contrast(101%);
-  /* tint icon to dark brown */
+  filter: invert(21%) sepia(81%) saturate(427%) hue-rotate(339deg) brightness(104%) contrast(101%);
 }

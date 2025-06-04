@@ -1,53 +1,48 @@
 $(document).ready(() => {
-    getAllTodos();
-    $("#todo").keypress((event) => {
-        if (event.which == 13) {
-            const todo = event.currentTarget.value;
-            addTodo(todo);
-            event.currentTarget.value = ""
-        }
+  chrome.storage.local.get(["todos"], (data) => {
+    const todos = data.todos || [];
+    todos.forEach((task) => appendTodo(task));
+  });
+
+  $("#todoInput").on("keypress", (e) => {
+    if (e.which === 13) {
+      const text = $("#todoInput").val().trim();
+      if (!text) return;
+      addTodo(text);
+      $("#todoInput").val("");
+    }
+  });
+});
+
+function appendTodo(text) {
+  const li = $(`
+    <li>
+      <span class="todo-text">${text}</span>
+      <button class="delete-todo">×</button>
+    </li>
+  `);
+  $("#todo-list").append(li);
+  li.find(".delete-todo").on("click", function () {
+    const todoText = li.find(".todo-text").text();
+    removeTodo(todoText);
+    li.remove();
+  });
+}
+
+function addTodo(text) {
+  chrome.storage.local.get(["todos"], (data) => {
+    const todos = data.todos || [];
+    todos.push(text);
+    chrome.storage.local.set({ todos: todos }, () => {
+      appendTodo(text);
     });
-    $("body").on("click", "input[type='checkbox']", (ele) => {
-        const itemToRemove = ele.currentTarget.attributes.id.value;
-        removeTodo(itemToRemove);
-    })
-})
-
-
-function removeTodo(itemKey) {
-
-    chrome.storage.local.remove(itemKey, () => {
-        $(`li#${itemKey}`).remove();
-    })
-
-}
-function getAllTodos() {
-
-    chrome.storage.local.get(null, (item) => {
-        for (let [key, value] of Object.entries(item)) {
-            if (key != "name") {
-                console.log(item);
-                let ui = `<li id="${key}"><label class="checkbox">
-                <input type="checkbox" id="${key}"> ${value} </label></li>`;
-                $("#todoSection").append(ui);
-            }
-        }
-    })
-
+  });
 }
 
-function uuidv4() {
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-}
-
-function addTodo(todoItem) {
-    const key = uuidv4();
-    chrome.storage.local.set({
-        [key]: todoItem
-    })
-    let ui = `<li id="${key}"><label class="checkbox">
-    <input type="checkbox" id="${key}"> ${todoItem} </label></li>`;
-    $("#todoSection").append(ui);
+function removeTodo(text) {
+  chrome.storage.local.get(["todos"], (data) => {
+    let todos = data.todos || [];
+    todos = todos.filter((t) => t !== text);
+    chrome.storage.local.set({ todos: todos });
+  });
 }
