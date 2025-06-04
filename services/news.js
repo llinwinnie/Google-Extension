@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://feeds.bbci.co.uk/news/technology/rss.xml')  // Replace with your API URL
+    fetch('https://feeds.bbci.co.uk/news/technology/rss.xml') 
         .then(response => response.json())
         .then(data => {
             // Update the content within the #facts section
