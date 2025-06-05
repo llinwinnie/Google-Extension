@@ -4,79 +4,148 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DailyDo</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="css/styles.css" />
+   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <div class="overlay">
+  <div class="container">
+   
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="My Logo" id="persistentLogo">
+    </div>
+
+  
     <div class="top-nav">
-      <a href="https://mail.google.com/" target="_blank">
-        <img src="assets/gmail_48.png" class="icon" alt="Gmail" /> Gmail
+      <a href="https://mail.google.com/" target="_blank" class="nav-item">
+        <span>Gmail</span>
       </a>
-      <a href="https://images.google.com/" target="_blank">
-        <img src="assets/images_icon.png" class="icon" alt="Images" /> Images
+      <a href="https://images.google.com/" target="_blank" class="nav-item">
+        <span>Images</span>
       </a>
-      <a href="#" id="flaskLink">
-        <img src="assets/flask_icon.png" class="icon" alt="Flask" /> Labs
-      </a>
-      <a href="#" id="apps-link">
-        <img src="assets/apps_black_24dp.png" class="icon" alt="Apps" />
-      </a>
-      <a href="#" id="profile-link">
-        <img src="assets/profile_pic.png" class="profile" alt="Profile" />
-      </a>
-      <a href="#" id="bgColorBtn">BG</a>
+
+     
+      <button class="nav-item" id="bgColorBtn">
+        <span>Theme</span>
+      </button>
+
+      
+      <input 
+        type="text" 
+        id="hexInput" 
+        class="hex-input" 
+        placeholder="#AABBCC"
+        maxlength="7"
+      >
+      <button class="nav-item" id="applyHexBtn">
+        <span>Apply</span>
+      </button>
+
+      <button class="nav-item" id="apps-menu">
+        <span>Apps</span>
+      </button>
+      <div class="profile-pic"></div>
     </div>
 
-    <div id="clock">
-      <div id="time">00:00</div>
-      <div id="date">Loading date...</div>
+
+    <div class="time-container">
+      <div class="time" id="time">12:00 AM</div>
+      <div class="date" id="date">Loading...</div>
     </div>
 
-    <div class="events-container draggable" id="bigEventsPanel">
-      <h2 class="panel-header">Big Events</h2>
-      <input id="eventInput" type="text" placeholder="Add an event and press Enter" />
-      <ul id="events-list"></ul>
-    </div>
-
-    <div class="greeting-card">
-      <h1>Welcome!</h1>
-      <div id="weather-display" class="weather-display">
-        <img id="weather-icon" src="" alt="Weather Icon" style="display: none;" />
-        <span id="weather-text">Loading…</span>
+ 
+    <div class="quote-widget" id="quoteWidget">
+      <div class="quote-header">Quote</div>
+      <div class="quote-display" id="quoteDisplay">
+        <div id="quoteText">"Click to get a quote"</div>
+        <div class="quote-author" id="quoteAuthor"></div>
       </div>
     </div>
 
-    <div class="todo-container draggable" id="todoPanel">
-      <h2 class="panel-header">To‐Do</h2>
-      <input id="todoInput" type="text" placeholder="Add a task and press Enter" />
-      <ul id="todo-list"></ul>
+ 
+    <div class="book-widget" id="bookWidget">
+      <div class="book-header">Book of Answers</div>
+      <div class="book-display" id="bookDisplay">
+        <div id="bookText">"Click for an answer"</div>
+      </div>
     </div>
 
-    <div class="calculator draggable" id="calculatorPanel">
-      <h2 class="panel-header">Calculator</h2>
-      <input type="text" class="calculator-display" id="calcDisplay" readonly />
+
+    <div class="main-content">
+      <div class="google-logo">Google</div>
+      
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search Google or type a URL" id="searchBox">
+        <div class="search-icon">🔍</div>
+      </div>
+
+      <div class="shortcuts">
+        <a href="https://mail.google.com/" class="shortcut">Gmail</a>
+        <a href="https://images.google.com/" class="shortcut">Images</a>
+        <a href="https://maps.google.com/" class="shortcut">Maps</a>
+        <a href="https://youtube.com/" class="shortcut">YouTube</a>
+      </div>
+    </div>
+
+
+    <div class="recent-tabs" id="recentTabs">
+      <div class="tab-item">
+        <div class="tab-icon"></div>
+        <span>Gmail</span>
+      </div>
+      <div class="tab-item">
+        <div class="tab-icon"></div>
+        <span>YouTube</span>
+      </div>
+      <div class="tab-item">
+        <div class="tab-icon"></div>
+        <span>Maps</span>
+      </div>
+    </div>
+
+
+    <div class="weather-display" id="weatherDisplay">
+      <span id="weatherText">Loading weather...</span>
+    </div>
+
+
+    <div class="panel events-panel draggable" id="eventsPanel">
+      <div class="panel-header">Big Events</div>
+      <input type="text" placeholder="Add event (e.g., Birthday on 2025-12-25)" id="eventInput">
+      <ul id="eventsList"></ul>
+    </div>
+
+
+    <div class="panel todo-panel draggable" id="todoPanel">
+      <div class="panel-header">To-Do</div>
+      <input type="text" placeholder="Add a task and press Enter" id="todoInput">
+      <ul id="todoList"></ul>
+    </div>
+
+
+    <div class="panel calculator-panel draggable" id="calculatorPanel">
+      <div class="panel-header">Calculator</div>
+      <input type="text" class="calculator-display" id="calcDisplay" readonly>
       <div class="calculator-buttons">
-        <button class="span-two" data-value="7">7</button>
-        <button data-value="8">8</button>
-        <button data-value="9">9</button>
-        <button data-value="/">÷</button>
-        <button data-value="4">4</button>
-        <button data-value="5">5</button>
-        <button data-value="6">6</button>
-        <button data-value="*">×</button>
-        <button data-value="1">1</button>
-        <button data-value="2">2</button>
-        <button data-value="3">3</button>
-        <button data-value="-">−</button>
-        <button data-value="0">0</button>
-        <button data-value=".">•</button>
-        <button data-value="=">=</button>
-        <button data-value="+">+</button>
-        <button class="span-two" data-action="clear">C</button>
+        <button class="calc-btn span-two" data-action="clear">C</button>
+        <button class="calc-btn operator" data-value="/">÷</button>
+        <button class="calc-btn operator" data-value="*">×</button>
+        <button class="calc-btn" data-value="7">7</button>
+        <button class="calc-btn" data-value="8">8</button>
+        <button class="calc-btn" data-value="9">9</button>
+        <button class="calc-btn operator" data-value="-">−</button>
+        <button class="calc-btn" data-value="4">4</button>
+        <button class="calc-btn" data-value="5">5</button>
+        <button class="calc-btn" data-value="6">6</button>
+        <button class="calc-btn operator" data-value="+">+</button>
+        <button class="calc-btn" data-value="1">1</button>
+        <button class="calc-btn" data-value="2">2</button>
+        <button class="calc-btn" data-value="3">3</button>
+        <button class="calc-btn" data-value="0">0</button>
+        <button class="calc-btn" data-value=".">.</button>
+        <button class="calc-btn operator span-two" data-value="=">=</button>
       </div>
     </div>
   </div>
+
 
   <script src="services/jquery.js"></script>
   <script src="services/bg.js"></script>

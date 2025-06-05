@@ -2,10 +2,14 @@ $(function() {
   function updateTimeAndDate() {
     const now = new Date();
     let hours = now.getHours();
-    let minutes = now.getMinutes();
-    if (hours < 10) hours = "0" + hours;
-    if (minutes < 10) minutes = "0" + minutes;
-    $("#time").text(`${hours}:${minutes}`);
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    const displayHours = String(hours).padStart(2, '0');
+
+    document.getElementById('time').textContent = `${displayHours}:${minutes} ${ampm}`;
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = [
@@ -16,8 +20,9 @@ $(function() {
     const dayNum = now.getDate();
     const monthName = months[now.getMonth()];
     const year = now.getFullYear();
-    $("#date").text(`${dayName}, ${dayNum} ${monthName} ${year}`);
-  }
+  
+    document.getElementById('date').textContent = `${dayName}, ${dayNum} ${monthName} ${year}`;
+    }
 
   updateTimeAndDate();
   setInterval(updateTimeAndDate, 1000);
