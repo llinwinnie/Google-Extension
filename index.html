@@ -18,31 +18,26 @@
       <a href="https://mail.google.com/" target="_blank" class="nav-item">
         <span>Gmail</span>
       </a>
-      <a href="https://images.google.com/" target="_blank" class="nav-item">
-        <span>Images</span>
-      </a>
 
-     
-      <button class="nav-item" id="bgColorBtn">
-        <span>Theme</span>
-      </button>
+      <button class="nav-item" id="bgColorBtn">Theme</button>
 
-      
-      <input 
-        type="text" 
-        id="hexInput" 
-        class="hex-input" 
-        placeholder="#AABBCC"
-        maxlength="7"
-      >
-      <button class="nav-item" id="applyHexBtn">
-        <span>Apply</span>
-      </button>
+      <div class="nav-item dropdown" id="appsMenu">
+        <span>Apps ▾</span>
+        <ul class="dropdown-menu">
+          <li><a href="https://drive.google.com" target="_blank">Drive</a></li>
+          <li><a href="https://docs.google.com" target="_blank">Docs</a></li>
+          <li><a href="https://sheets.google.com" target="_blank">Sheets</a></li>
+          <li><a href="https://photos.google.com" target="_blank">Photos</a></li>
+          <li><a href="https://mail.google.com/" target="_blank">Gmail</a></li>
+        </ul>
+      </div>
 
-      <button class="nav-item" id="apps-menu">
-        <span>Apps</span>
-      </button>
-      <div class="profile-pic"></div>
+      <div class="nav-item dropdown" id="profileMenu">
+        <img src="assets/profile.png" alt="Profile" class="profile-pic">
+        <ul class="dropdown-menu">
+          <li><a href="#">Swap account…</a></li>
+        </ul>
+      </div>
     </div>
 
 
@@ -51,22 +46,23 @@
       <div class="date" id="date">Loading...</div>
     </div>
 
- 
+    <div class="widgets">
     <div class="quote-widget" id="quoteWidget">
       <div class="quote-header">Quote</div>
-      <div class="quote-display" id="quoteDisplay">
-        <div id="quoteText">"Click to get a quote"</div>
-        <div class="quote-author" id="quoteAuthor"></div>
+      <div class="widget-body collapsed" id="quoteDisplay">
+        <span id="quoteText" class="placeholder">Click to get a quote</span>
+        <span id="quoteAuthor"></span>
       </div>
     </div>
 
  
-    <div class="book-widget" id="bookWidget">
-      <div class="book-header">Book of Answers</div>
-      <div class="book-display" id="bookDisplay">
-        <div id="bookText">"Click for an answer"</div>
+    <div class="book-widget widget" id="bookWidget">
+      <div class="widget-header">Book of Answers</div>
+      <div class="widget-body collapsed" id="bookDisplay">
+          <span id="bookText" class="placeholder">Click for an answer</span>
       </div>
     </div>
+  </div>
 
 
     <div class="main-content">
@@ -76,10 +72,10 @@
         <input type="text" class="search-box" placeholder="Search Google or type a URL" id="searchBox">
         <div class="search-icon">🔍</div>
       </div>
+    </div>
 
       <div class="shortcuts">
         <a href="https://mail.google.com/" class="shortcut">Gmail</a>
-        <a href="https://images.google.com/" class="shortcut">Images</a>
         <a href="https://maps.google.com/" class="shortcut">Maps</a>
         <a href="https://youtube.com/" class="shortcut">YouTube</a>
       </div>
@@ -102,29 +98,34 @@
     </div>
 
 
-    <div class="weather-display" id="weatherDisplay">
-      <span id="weatherText">Loading weather...</span>
-    </div>
+    
 
+    <div class="panels">
+      <div class="panel draggable" id="weatherPanel">
+        <div class="panel-header">Weather</div>
+        <div class="panel-body">
+          <img id="weatherIcon" alt="" style="display:none;">
+          <span id="weatherText">Loading weather…</span>
+        </div>
+      </div>
 
-    <div class="panel events-panel draggable" id="eventsPanel">
-      <div class="panel-header">Big Events</div>
-      <input type="text" placeholder="Add event (e.g., Birthday on 2025-12-25)" id="eventInput">
-      <ul id="eventsList"></ul>
-    </div>
+      <div class="panel draggable" id="eventsPanel">
+        <div class="panel-header">Big Events</div>
+        <input type="text" placeholder="Add event (e.g., Birthday on 2025-12-25)" id="eventInput">
+        <ul id="eventsList"></ul>
+      </div>
 
+      <div class="panel draggable" id="todoPanel">
+        <div class="panel-header">To-Do</div>
+        <input type="text" placeholder="Add a task and press Enter" id="todoInput">
+        <ul id="todoList"></ul>
+      </div>
 
-    <div class="panel todo-panel draggable" id="todoPanel">
-      <div class="panel-header">To-Do</div>
-      <input type="text" placeholder="Add a task and press Enter" id="todoInput">
-      <ul id="todoList"></ul>
-    </div>
-
-
-    <div class="panel calculator-panel draggable" id="calculatorPanel">
-      <div class="panel-header">Calculator</div>
-      <input type="text" class="calculator-display" id="calcDisplay" readonly>
-      <div class="calculator-buttons">
+      <div class="panel draggable" id="calculatorPanel">
+        <div class="panel-header">Calculator</div>
+        <input type="text" id="calcDisplay" readonly>
+        <div class="calculator-buttons">
+          
         <button class="calc-btn span-two" data-action="clear">C</button>
         <button class="calc-btn operator" data-value="/">÷</button>
         <button class="calc-btn operator" data-value="*">×</button>
