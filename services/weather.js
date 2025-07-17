@@ -20,16 +20,16 @@ navigator.geolocation.getCurrentPosition(
         } else {
           iconUrl = "https://openweathermap.org/img/wn/04d@2x.png";
         }
-        $("#weather-icon").attr("src", iconUrl).show();
-        $("#weather-text").text(`${tempF}°F`);
+        $("#weatherIcon").attr("src", iconUrl).show();
+        $("#weatherText").text(`${tempF}°F`);
       })
       .catch((err) => {
         console.error("Error fetching weather:", err);
-        $("#weather-text").text("Weather unavailable");
+        $("#weatherText").text("Weather unavailable");
       });
   },
   (error) => {
     console.error("Geolocation failed:", error);
-    $("#weather-text").text("Location unavailable");
+    $("#weatherText").text("Location unavailable");
   }
 );

@@ -24,5 +24,5 @@ function fetchBookAnswer() {
     "Your next step is clear—take it."
   ];
   const idx = Math.floor(Math.random() * answers.length);
-  document.getElementById('bookText').textContent = `"${answers[idx]}"`;
+  document.getElementById('bookText').textContent = `${answers[idx]}`;
 }

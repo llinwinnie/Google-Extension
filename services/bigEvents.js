@@ -15,13 +15,10 @@ $(document).ready(() => {
 });
 
 function appendEvent(text) {
-  const li = $(`
-    <li>
-      <span class="event-text">${text}</span>
-      <button class="delete-event">×</button>
-    </li>
-  `);
-  $("#events-list").append(li);
+  const li = $(
+    `<li><span class="event-text">${text}</span><button class="delete-event">×</button></li>`
+  );
+  $("#eventsList").append(li);
   li.find(".delete-event").on("click", function () {
     const evText = li.find(".event-text").text();
     removeEvent(evText);

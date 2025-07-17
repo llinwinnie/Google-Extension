@@ -1,39 +1,36 @@
 $(document).ready(() => {
     getAllTodos();
-    $("#todo").keypress((event) => {
+    $("#todoInput").keypress((event) => {
         if (event.which == 13) {
-            const todo = event.currentTarget.value;
-            addTodo(todo);
-            event.currentTarget.value = ""
+            const todo = event.currentTarget.value.trim();
+            if (todo) {
+                addTodo(todo);
+                event.currentTarget.value = "";
+            }
         }
     });
-    $("body").on("click", "input[type='checkbox']", (ele) => {
-        const itemToRemove = ele.currentTarget.attributes.id.value;
+    $("#todoList").on("click", "input[type='checkbox']", (ele) => {
+        const itemToRemove = ele.currentTarget.id;
         removeTodo(itemToRemove);
-    })
-})
-
+    });
+});
 
 function removeTodo(itemKey) {
-
     chrome.storage.local.remove(itemKey, () => {
         $(`li#${itemKey}`).remove();
-    })
-
+    });
 }
-function getAllTodos() {
 
+function getAllTodos() {
     chrome.storage.local.get(null, (item) => {
         for (let [key, value] of Object.entries(item)) {
             if (key != "name") {
-                console.log(item);
                 let ui = `<li id="${key}"><label class="checkbox">
                 <input type="checkbox" id="${key}"> ${value} </label></li>`;
-                $("#todoSection").append(ui);
+                $("#todoList").append(ui);
             }
         }
-    })
-
+    });
 }
 
 function uuidv4() {
@@ -46,8 +43,8 @@ function addTodo(todoItem) {
     const key = uuidv4();
     chrome.storage.local.set({
         [key]: todoItem
-    })
+    });
     let ui = `<li id="${key}"><label class="checkbox">
     <input type="checkbox" id="${key}"> ${todoItem} </label></li>`;
-    $("#todoSection").append(ui);
+    $("#todoList").append(ui);
 }
