@@ -3,161 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DailyDo</title>
-   <link rel="stylesheet" href="css/styles.css" />
+  <title>New Tab</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div class="container">
-   
+    <!-- Logo with dropdown menu - this is where all my custom tools are hidden -->
     <div class="logo-container">
-      <img src="assets/logo.png" alt="My Logo" id="persistentLogo">
+      <img src="icon.png" alt="My Logo" id="persistentLogo" class="logo-dropdown-trigger">
+      <div class="dropdown-menu" id="logoDropdown">
+        <div class="dropdown-header">Tools & Widgets</div>
+        <div class="dropdown-item" data-widget="quote">Quote Generator</div>
+        <div class="dropdown-item" data-widget="calculator">Calculator</div>
+        <div class="dropdown-item" data-widget="todo">To-Do List</div>
+        <div class="dropdown-item" data-widget="events">Big Events</div>
+        <div class="dropdown-item" data-widget="weather">Weather</div>
+        <div class="dropdown-item" data-widget="book">Book of Answers</div>
+      </div>
     </div>
 
-  
+    <!-- Top navigation - copied from original Google new tab -->
     <div class="top-nav">
       <a href="https://mail.google.com/" target="_blank" class="nav-item">
         <span>Gmail</span>
       </a>
-
-      <button class="nav-item" id="bgColorBtn">Theme</button>
-
-      <div class="nav-item dropdown" id="appsMenu">
-        <span>Apps ▾</span>
-        <ul class="dropdown-menu">
-          <li><a href="https://drive.google.com" target="_blank">Drive</a></li>
-          <li><a href="https://docs.google.com" target="_blank">Docs</a></li>
-          <li><a href="https://sheets.google.com" target="_blank">Sheets</a></li>
-          <li><a href="https://photos.google.com" target="_blank">Photos</a></li>
-          <li><a href="https://mail.google.com/" target="_blank">Gmail</a></li>
-        </ul>
+      <a href="https://images.google.com/" target="_blank" class="nav-item">
+        <span>Images</span>
+      </a>
+      <div class="nav-item" id="experiments">
+        <span>🧪</span>
       </div>
-
-      <div class="nav-item dropdown" id="profileMenu">
-        <img src="assets/profile.png" alt="Profile" class="profile-pic">
-        <ul class="dropdown-menu">
-          <li><a href="#">Swap account…</a></li>
-        </ul>
+      <div class="nav-item" id="appsMenu">
+        <span>⋮⋮⋮</span>
+      </div>
+      <div class="nav-item" id="profileMenu">
+        <div class="profile-pic" id="userProfilePic">
+          <!-- User's original profile picture will be loaded here -->
+        </div>
       </div>
     </div>
 
-
-    <div class="time-container">
-      <div class="time" id="time">12:00 AM</div>
-      <div class="date" id="date">Loading...</div>
-    </div>
-
-    <div class="widgets">
-    <div class="quote-widget" id="quoteWidget">
-      <div class="quote-header">Quote</div>
-      <div class="widget-body quote-display collapsed" id="quoteDisplay">
-        <span id="quoteText" class="placeholder">Click to get a quote</span>
-        <span id="quoteAuthor"></span>
-      </div>
-    </div>
-
- 
-    <div class="book-widget widget" id="bookWidget">
-      <div class="widget-header">Book of Answers</div>
-      <div class="widget-body collapsed" id="bookDisplay">
-          <span id="bookText" class="placeholder">Click for an answer</span>
-      </div>
-    </div>
-  </div>
-
-
+    <!-- Main Google content - this is the center search area -->
     <div class="main-content">
       <div class="google-logo">Google</div>
       
       <div class="search-container">
+        <div class="search-icon-left">🔍</div>
         <input type="text" class="search-box" placeholder="Search Google or type a URL" id="searchBox">
-        <div class="search-icon">🔍</div>
+        <div class="search-icon-right">🎤</div>
+        <div class="search-icon-lens">📷</div>
       </div>
     </div>
 
-      <div class="shortcuts">
-        <a href="https://mail.google.com/" class="shortcut">Gmail</a>
-        <a href="https://maps.google.com/" class="shortcut">Maps</a>
-        <a href="https://youtube.com/" class="shortcut">YouTube</a>
-      </div>
-    </div>
-
-
-    <div class="recent-tabs" id="recentTabs">
-      <div class="tab-item">
-        <div class="tab-icon"></div>
+    <!-- Shortcuts - like the original Google new tab -->
+    <div class="shortcuts">
+      <a href="https://mail.google.com/" class="shortcut">
+        <div class="shortcut-icon">📧</div>
         <span>Gmail</span>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon"></div>
-        <span>YouTube</span>
-      </div>
-      <div class="tab-item">
-        <div class="tab-icon"></div>
-        <span>Maps</span>
+      </a>
+      <a href="#" class="shortcut" id="addShortcut">
+        <div class="shortcut-icon">+</div>
+        <span>Add shortcut</span>
+      </a>
+    </div>
+
+    <!-- Continue with these tabs section - copied from original -->
+    <div class="recent-tabs" id="recentTabs">
+      <div class="tabs-header">Continue with these tabs</div>
+      <div class="tabs-content">
+        <!-- Real recent tabs will be loaded here from Chrome history -->
+        <div class="loading-tabs">Loading recent tabs...</div>
       </div>
     </div>
 
+    <!-- Customize Chrome button - bottom right corner -->
+    <div class="customize-button">
+      <button class="customize-btn">
+        <span>✏️</span>
+        <span>Customize Chrome</span>
+      </button>
+    </div>
 
-    
+    <!-- Hidden widgets - these only show when you click the logo dropdown -->
+    <div class="widgets-container" id="widgetsContainer">
+      <!-- Quote Widget -->
+      <div class="widget-panel" id="quotePanel" style="display: none;">
+        <div class="panel-header">
+          <span>Quote Generator</span>
+          <button class="close-btn" data-panel="quote">×</button>
+        </div>
+        <div class="panel-body">
+          <div class="quote-widget" id="quoteWidget">
+            <div class="quote-header">Quote</div>
+            <div class="widget-body quote-display collapsed" id="quoteDisplay">
+              <span id="quoteText" class="placeholder">Click to get a quote</span>
+              <span id="quoteAuthor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="panels">
-      <div class="panel draggable" id="weatherPanel">
-        <div class="panel-header">Weather</div>
+      <!-- Calculator Widget -->
+      <div class="widget-panel" id="calculatorPanel" style="display: none;">
+        <div class="panel-header">
+          <span>Calculator</span>
+          <button class="close-btn" data-panel="calculator">×</button>
+        </div>
+        <div class="panel-body">
+          <input type="text" id="calcDisplay" readonly class="calculator-display">
+          <div class="calculator-buttons">
+            <button class="calc-btn span-two" data-action="clear">C</button>
+            <button class="calc-btn operator" data-value="/">÷</button>
+            <button class="calc-btn operator" data-value="*">×</button>
+            <button class="calc-btn" data-value="7">7</button>
+            <button class="calc-btn" data-value="8">8</button>
+            <button class="calc-btn" data-value="9">9</button>
+            <button class="calc-btn operator" data-value="-">−</button>
+            <button class="calc-btn" data-value="4">4</button>
+            <button class="calc-btn" data-value="5">5</button>
+            <button class="calc-btn" data-value="6">6</button>
+            <button class="calc-btn operator" data-value="+">+</button>
+            <button class="calc-btn" data-value="1">1</button>
+            <button class="calc-btn" data-value="2">2</button>
+            <button class="calc-btn" data-value="3">3</button>
+            <button class="calc-btn" data-value="0">0</button>
+            <button class="calc-btn" data-value=".">.</button>
+            <button class="calc-btn operator span-two" data-value="=">=</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Todo Widget -->
+      <div class="widget-panel" id="todoPanel" style="display: none;">
+        <div class="panel-header">
+          <span>To-Do List</span>
+          <button class="close-btn" data-panel="todo">×</button>
+        </div>
+        <div class="panel-body">
+          <input type="text" placeholder="Add a task and press Enter" id="todoInput">
+          <ul id="todoList"></ul>
+        </div>
+      </div>
+
+      <!-- Events Widget -->
+      <div class="widget-panel" id="eventsPanel" style="display: none;">
+        <div class="panel-header">
+          <span>Big Events</span>
+          <button class="close-btn" data-panel="events">×</button>
+        </div>
+        <div class="panel-body">
+          <input type="text" placeholder="Add event (e.g., Birthday on 2025-12-25)" id="eventInput">
+          <ul id="eventsList"></ul>
+        </div>
+      </div>
+
+      <!-- Weather Widget -->
+      <div class="widget-panel" id="weatherPanel" style="display: none;">
+        <div class="panel-header">
+          <span>Weather</span>
+          <button class="close-btn" data-panel="weather">×</button>
+        </div>
         <div class="panel-body">
           <img id="weatherIcon" alt="" style="display:none;">
           <span id="weatherText">Loading weather…</span>
         </div>
       </div>
 
-      <div class="panel draggable" id="eventsPanel">
-        <div class="panel-header">Big Events</div>
-        <input type="text" placeholder="Add event (e.g., Birthday on 2025-12-25)" id="eventInput">
-        <ul id="eventsList"></ul>
-      </div>
-
-      <div class="panel draggable" id="todoPanel">
-        <div class="panel-header">To-Do</div>
-        <input type="text" placeholder="Add a task and press Enter" id="todoInput">
-        <ul id="todoList"></ul>
-      </div>
-
-      <div class="panel draggable" id="calculatorPanel">
-        <div class="panel-header">Calculator</div>
-        <input type="text" id="calcDisplay" readonly>
-        <div class="calculator-buttons">
-          
-        <button class="calc-btn span-two" data-action="clear">C</button>
-        <button class="calc-btn operator" data-value="/">÷</button>
-        <button class="calc-btn operator" data-value="*">×</button>
-        <button class="calc-btn" data-value="7">7</button>
-        <button class="calc-btn" data-value="8">8</button>
-        <button class="calc-btn" data-value="9">9</button>
-        <button class="calc-btn operator" data-value="-">−</button>
-        <button class="calc-btn" data-value="4">4</button>
-        <button class="calc-btn" data-value="5">5</button>
-        <button class="calc-btn" data-value="6">6</button>
-        <button class="calc-btn operator" data-value="+">+</button>
-        <button class="calc-btn" data-value="1">1</button>
-        <button class="calc-btn" data-value="2">2</button>
-        <button class="calc-btn" data-value="3">3</button>
-        <button class="calc-btn" data-value="0">0</button>
-        <button class="calc-btn" data-value=".">.</button>
-        <button class="calc-btn operator span-two" data-value="=">=</button>
+      <!-- Book Widget -->
+      <div class="widget-panel" id="bookPanel" style="display: none;">
+        <div class="panel-header">
+          <span>Book of Answers</span>
+          <button class="close-btn" data-panel="book">×</button>
+        </div>
+        <div class="panel-body">
+          <div class="book-widget widget" id="bookWidget">
+            <div class="widget-header">Book of Answers</div>
+            <div class="widget-body collapsed" id="bookDisplay">
+              <span id="bookText" class="placeholder">Click for an answer</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-
+  <!-- Scripts - load these in order so dependencies work -->
   <script src="services/jquery.js"></script>
+  <script src="services/dropdown.js"></script>
+  <script src="services/profile.js"></script>
+  <script src="services/customize.js"></script>
+  <script src="services/shortcuts.js"></script>
   <script src="services/bg.js"></script>
   <script src="services/button.js"></script>
   <script src="services/weather.js"></script>
   <script src="services/quotes.js"></script>
-  <script src="services/news.js"></script>
   <script src="services/bigEvents.js"></script>
   <script src="services/todo.js"></script>
   <script src="services/calculator.js"></script>
   <script src="services/drag.js"></script>
   <script src="services/bgColor.js"></script>
+  <script src="services/book.js"></script>
 </body>
 </html>

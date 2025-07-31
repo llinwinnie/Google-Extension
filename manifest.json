@@ -22,11 +22,15 @@
       "alarms",
       "geolocation",
       "notifications",
-      "tabs"
+      "tabs",
+      "identity",
+      "history"
     ],
     "host_permissions": [
       "https://feeds.bbci.co.uk/*",
       "https://api.open-meteo.com/*",
-      "https://api.quotable.io/*"
+      "https://api.quotable.io/*",
+      "https://nominatim.openstreetmap.org/*",
+      "https://api.bigdatacloud.net/*"
   ]
 }

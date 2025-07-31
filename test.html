@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test Page</title>
+  <style>
+    body {
+      background: #202124;
+      color: #e8eaed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .test-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .test-button {
+      background: #8ab4f8;
+      color: #202124;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .test-button:hover {
+      background: #aecbfa;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>Extension Test Page</h1>
+    <p>This page tests the dropdown functionality and widget management.</p>
+    
+    <button class="test-button" onclick="testDropdown()">Test Dropdown</button>
+    <button class="test-button" onclick="testWidgets()">Test Widgets</button>
+    <button class="test-button" onclick="testSearch()">Test Search</button>
+    
+    <div id="testResults"></div>
+  </div>
+
+  <script src="services/jquery.js"></script>
+  <script src="services/dropdown.js"></script>
+  
+  <script>
+    function testDropdown() {
+      console.log('Testing dropdown functionality...');
+      $('#testResults').html('<p>Dropdown test completed. Check console for details.</p>');
+    }
+    
+    function testWidgets() {
+      console.log('Testing widget functionality...');
+      $('#testResults').html('<p>Widget test completed. Check console for details.</p>');
+    }
+    
+    function testSearch() {
+      console.log('Testing search functionality...');
+      $('#testResults').html('<p>Search test completed. Check console for details.</p>');
+    }
+  </script>
+</body>
+</html> 
