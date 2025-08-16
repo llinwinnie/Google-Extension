@@ -11,32 +11,38 @@ $(document).ready(() => {
 });
 
 function loadBookmarks() {
-  // Get bookmarks from Chrome's bookmarks API
-  chrome.bookmarks.getTree((bookmarkTreeNodes) => {
-    const bookmarks = [];
-    
-    // Extract bookmarks from the tree structure
-    function extractBookmarks(nodes) {
-      for (let node of nodes) {
-        if (node.url) {
-          // This is a bookmark
-          bookmarks.push({
-            title: node.title || 'Untitled',
-            url: node.url,
-            id: node.id
-          });
-        } else if (node.children) {
-          // This is a folder, recurse into it
-          extractBookmarks(node.children);
+  // Use cached bookmarks data if available, otherwise fetch from Chrome API
+  apiCache.chromeAPIWithCache(chrome.bookmarks.getTree, {}, { maxAge: 5 * 60 * 1000 }) // Cache bookmarks for 5 minutes
+    .then((bookmarkTreeNodes) => {
+      const bookmarks = [];
+      
+      // Extract bookmarks from the tree structure
+      function extractBookmarks(nodes) {
+        for (let node of nodes) {
+          if (node.url) {
+            // This is a bookmark
+            bookmarks.push({
+              title: node.title || 'Untitled',
+              url: node.url,
+              id: node.id
+            });
+          } else if (node.children) {
+            // This is a folder, recurse into it
+            extractBookmarks(node.children);
+          }
         }
       }
-    }
-    
-    extractBookmarks(bookmarkTreeNodes);
-    
-    // Display bookmarks (limit to first 10 for space)
-    displayBookmarks(bookmarks.slice(0, 10));
-  });
+      
+      extractBookmarks(bookmarkTreeNodes);
+      
+      // Display bookmarks (limit to first 10 for space)
+      displayBookmarks(bookmarks.slice(0, 10));
+    })
+    .catch((error) => {
+      console.error('Error loading bookmarks:', error);
+      // Show default bookmarks if API fails
+      displayBookmarks([]);
+    });
 }
 
 function displayBookmarks(bookmarks) {

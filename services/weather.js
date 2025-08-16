@@ -28,14 +28,10 @@ function getWeatherAndLocation() {
 }
 
 function getWeatherData(lat, lon) {
-  // Use Open-Meteo API to get current weather data
+  // Use cached weather data if available, otherwise fetch from API
   const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=auto`;
-
-  fetch(weatherUrl)
-    .then((response) => {
-      if (!response.ok) throw new Error("Weather fetch failed");
-      return response.json();
-    })
+  
+  apiCache.fetchWithCache(weatherUrl, {}, { maxAge: 5 * 60 * 1000 }) // Cache weather for 5 minutes
     .then((data) => {
       const tempF = Math.round(data.current_weather.temperature);
       const code = data.current_weather.weathercode;
@@ -99,14 +95,10 @@ function getLocationData(lat, lon) {
 
 function getLocationFromOpenMeteo(lat, lon) {
   return new Promise((resolve, reject) => {
-    // Use Open-Meteo's geocoding API
+    // Use cached geocoding data if available, otherwise fetch from API
     const geocodingUrl = `https://api.open-meteo.com/v1/geocoding?latitude=${lat}&longitude=${lon}`;
     
-    fetch(geocodingUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error("OpenMeteo geocoding failed");
-        return response.json();
-      })
+    apiCache.fetchWithCache(geocodingUrl, {}, { maxAge: 30 * 60 * 1000 }) // Cache geocoding for 30 minutes
       .then((data) => {
         console.log('OpenMeteo response:', data);
         if (data.results && data.results.length > 0) {
@@ -142,14 +134,11 @@ function getLocationFromOpenMeteo(lat, lon) {
 
 function getLocationFromNominatim(lat, lon) {
   return new Promise((resolve, reject) => {
-    // Use OpenStreetMap's Nominatim service as backup
+    // Use cached geocoding data if available, otherwise fetch from API
     const geocodingUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`;
     
-    fetch(geocodingUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error("Nominatim geocoding failed");
-        return response.json();
-      })
+    apiCache.fetchWithCache(geocodingUrl, {}, { maxAge: 30 * 60 * 1000 }) // Cache geocoding for 30 minutes
+      .then((data) => {
       .then((data) => {
         console.log('Nominatim response:', data);
         if (data.address) {
@@ -188,14 +177,11 @@ function getLocationFromNominatim(lat, lon) {
 
 function getLocationFromGoogleGeocoding(lat, lon) {
   return new Promise((resolve, reject) => {
-    // Use BigDataCloud API - free geocoding service
+    // Use cached geocoding data if available, otherwise fetch from API
     const geocodingUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
     
-    fetch(geocodingUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error("BigDataCloud geocoding failed");
-        return response.json();
-      })
+    apiCache.fetchWithCache(geocodingUrl, {}, { maxAge: 30 * 60 * 1000 }) // Cache geocoding for 30 minutes
+      .then((data) => {
       .then((data) => {
         console.log('BigDataCloud response:', data);
         if (data.city && data.principalSubdivision) {

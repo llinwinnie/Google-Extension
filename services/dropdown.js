@@ -140,62 +140,64 @@ $(document).ready(() => {
     }, 3000); // 3 second timeout
 
     try {
-      // Get recent history items from Chrome
-      chrome.history.search({
+      // Use cached Chrome history data if available, otherwise fetch from API
+      const historyParams = {
         text: '', // Empty to get all recent visits
         maxResults: 6, // Show 6 recent tabs
         startTime: Date.now() - (24 * 60 * 60 * 1000) // Last 24 hours
-      }, (historyItems) => {
-        clearTimeout(timeout); // Clear timeout since we got a response
-        console.log('History search callback called');
-        
-        if (chrome.runtime.lastError) {
-          console.error('History search error:', chrome.runtime.lastError);
-          showDefaultTabs();
-          return;
-        }
-        
-        console.log('Found recent tabs:', historyItems);
-        
-        if (historyItems && historyItems.length > 0) {
-          // Clear existing static content
-          $('.tabs-content').empty();
+      };
+      
+      apiCache.chromeAPIWithCache(chrome.history.search, historyParams, { maxAge: 2 * 60 * 1000 }) // Cache history for 2 minutes
+        .then((historyItems) => {
+          clearTimeout(timeout); // Clear timeout since we got a response
+          console.log('History search callback called');
           
-          // Add real recent tabs
-          historyItems.forEach((item, index) => {
-            const domain = getDomainFromUrl(item.url);
-            const icon = getFaviconForDomain(domain);
-            const timeAgo = getTimeAgo(item.lastVisitTime);
+          console.log('Found recent tabs:', historyItems);
+          
+          if (historyItems && historyItems.length > 0) {
+            // Clear existing static content
+            $('.tabs-content').empty();
             
-            const tabHtml = `
-              <div class="tab-item" data-url="${item.url}" data-title="${item.title}">
-                <div class="tab-icon">${icon}</div>
-                <div class="tab-info">
-                  <div class="tab-title">${item.title}</div>
-                  <div class="tab-url">${domain}</div>
-                  <div class="tab-time">You visited ${timeAgo}</div>
+            // Add real recent tabs
+            historyItems.forEach((item, index) => {
+              const domain = getDomainFromUrl(item.url);
+              const icon = getFaviconForDomain(domain);
+              const timeAgo = getTimeAgo(item.lastVisitTime);
+              
+              const tabHtml = `
+                <div class="tab-item" data-url="${item.url}" data-title="${item.title}">
+                  <div class="tab-icon">${icon}</div>
+                  <div class="tab-info">
+                    <div class="tab-title">${item.title}</div>
+                    <div class="tab-url">${domain}</div>
+                    <div class="tab-time">You visited ${timeAgo}</div>
+                  </div>
                 </div>
-              </div>
-            `;
+              `;
+              
+              $('.tabs-content').append(tabHtml);
+            });
             
-            $('.tabs-content').append(tabHtml);
-          });
-          
-          // Re-bind click events for new tab items
-          $('.tab-item').off('click').on('click', (e) => {
-            const url = $(e.currentTarget).data('url');
-            const title = $(e.currentTarget).data('title');
-            
-            if (url) {
-              chrome.tabs.create({ url: url });
-              console.log('Opening real tab:', title, 'at', url);
-            }
-          });
-        } else {
-          console.log('No history items found');
+            // Re-bind click events for new tab items
+            $('.tab-item').off('click').on('click', (e) => {
+              const url = $(e.currentTarget).data('url');
+              const title = $(e.currentTarget).data('title');
+              
+              if (url) {
+                chrome.tabs.create({ url: url });
+                console.log('Opening real tab:', title, 'at', url);
+              }
+            });
+          } else {
+            console.log('No history items found');
+            showDefaultTabs();
+          }
+        })
+        .catch((error) => {
+          console.error('Error calling chrome.history.search:', error);
+          clearTimeout(timeout);
           showDefaultTabs();
-        }
-      });
+        });
     } catch (error) {
       console.error('Error calling chrome.history.search:', error);
       clearTimeout(timeout);

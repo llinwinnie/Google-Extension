@@ -27,13 +27,8 @@ $(document).ready(() => {
   let currentQuoteIndex = 0;
   
   function getRandomQuote() {
-    // Try to get a quote from the API first
-    return fetch('https://api.quotable.io/random')
-      .then((res) => {
-        console.log('Fetch response:', res);
-        if (!res.ok) throw new Error('Quotes fetch error');
-        return res.json();
-      })
+    // Use cached API response if available, otherwise fetch new quote
+    return apiCache.fetchWithCache('https://api.quotable.io/random', {}, { maxAge: 10 * 60 * 1000 }) // Cache quotes for 10 minutes
       .then((data) => {
         console.log('Quote data:', data);
         return {
